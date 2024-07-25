@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        .container{
+            display: grid;
+            grid-template-areas:
+            "header header header"
+            "sidebar main main"
+            "footer footer footer";
+        grid-template-rows: 60px 1fr 40px;
+        grid-template-columns: 200px 1fr 1fr;
+        height: 100vh;
+        }
+        .header{
+            grid-area: header;
+            background-color: #333;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .sidebar{
+            grid-area: main;
+            padding: 20px;
+            background-color: #fff;
+        }
+        .footer{
+            grid-area: footer;
+            background-color: #333;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <div class="header">Cabeçalho</div>
+        <div class="sidebar">Barra Lateral</div>
+        <div class="main">Conteúdo Principal</div>
+        <div class="footer">Rodapé</div>
+    </div>
+</body>
+</html>
