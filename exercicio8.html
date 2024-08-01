@@ -21,17 +21,22 @@
             justify-content: center;
         }
         .sidebar{
-            grid-area: main;
+            grid-area: nav li;
             padding: 20px;
-            background-color: #fff;
+            background-color: rgb(0, 0, 0);
+            color: rgb(255, 255, 255);
         }
         .footer{
             grid-area: footer;
             background-color: #333;
-            color: white;
+            color: rgb(255, 255, 255);
             display: flex;
             align-items: center;
             justify-content: center;
+        }
+        .main{
+            grid-area: main;
+            text-align: center;
         }
     </style>
     <meta charset="UTF-8">
@@ -41,10 +46,10 @@
 </head>
 <body>
     <div class="container">
-        <div class="header">Cabeçalho</div>
-        <div class="sidebar">Barra Lateral</div>
-        <div class="main">Conteúdo Principal</div>
-        <div class="footer">Rodapé</div>
+        <div class="header"><h1>Cabeçalho</h1></div>
+        <div class="sidebar"><h3>Barra Lateral</h3></div>
+        <div class="main"><h3>Conteúdo Principal</h3></div>
+        <div class="footer"><h3>Rodapé</h3></div>
     </div>
 </body>
 </html>
