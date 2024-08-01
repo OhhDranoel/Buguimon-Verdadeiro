@@ -6,19 +6,18 @@
     <title>Document</title>
 </head>
 <style>
-    .Container{
-        display: grid;
-        grid-template-rows: 200px 200px 200px 200px;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
-        grid-gap: 10px;
-        margin: 100px;
+    thead{
+        background-color: rgb(0, 0, 0);
+        color: rgb(255, 255, 255);
+        width: 200px;
     }
-    .Teste{
-        background-color: blue;
+    td{
+        background-color: rgb(99, 96, 96);
+        color: rgb(255, 255, 255);
+        width: 200px;
     }
 </style>
 <body>
-    <div class="Container">
     <table>
         <thead>
             <th> Nome </th>
@@ -27,42 +26,31 @@
             <th> Profissão </th>
         </thead>
         <tbody>
-            <div class="Teste">
-        <div>
             <tr>
                 <td> Rogério </td>
                 <td> 34 </td>
                 <td> Almirante Tamandaré </td>
                 <td> Pedreiro </td>
             </tr>
-        </div>
-        <div>
             <tr>
                 <td>  Naruto </td>
                 <td> 33 </td>
                 <td> Konohagakure </td>
                 <td> Hokage </td>
             </tr>
-        </div>
-        <div>
             <tr>
                 <td> Hagamenon </td>
                 <td> 2 </td>
                 <td> Liubliana</td>
                 <td> Carpinteiro </td>
             </tr>
-        </div>
-        <div>
             <tr>
                 <td> Jhin </td>
                 <td> 45 </td>
                 <td> Iônia </td>
                 <td> Assassino </td>
             </tr>
-        </div>
-    </div>
         </tbody>
     </table>
-</div>
 </body>
 </html>
