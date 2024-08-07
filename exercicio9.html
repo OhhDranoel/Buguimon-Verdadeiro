@@ -28,7 +28,27 @@
         text-align: left;
     }
     form label{
-
+        display: block;
+        margin-bottom: 5px;
+    }
+    form input{
+        width: 100%;
+        padding: 8px;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+    form input:focus{
+        border-color: blue;
+    }
+    form input:invalid:focus + error-message{
+        display: block;
+        color: red;
+        font-size: 12px;
+        margin-top: 5px;
+    }
+    .error-message{
+        display: none;
     }
 </style>
 <body>
