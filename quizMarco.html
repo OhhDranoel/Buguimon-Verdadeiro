@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Simples</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            padding: 20px;
+            transition: background-color 0.5s;
+        }
+        .quiz-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: auto;
+        }
+        .quiz-question {
+            margin-bottom: 20px;
+        }
+        .quiz-question h3 {
+            margin-bottom: 10px;
+        }
+        .quiz-question label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        button {
+            display: block;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container" id="quiz-container">
+        <h2>Quiz de Conhecimentos Gerais</h2>
+        <div id="question-container" class="quiz-question">
+            <h3 id="question"></h3>
+            <div id="options"></div>
+        </div>
+        <button onclick="nextQuestion()">Responder</button>
+    </div>
+    
+    <script>
+        const questions = [
+            {
+                question: "Qual é o maior planeta do nosso sistema solar?",
+                options: {
+                    a: "Terra",
+                    b: "Júpiter",
+                    c: "Saturno"
+                },
+                correct: "b"
+            },
+            {
+                question: "Quem pintou a Mona Lisa?",
+                options: {
+                    a: "Michelangelo",
+                    b: "Leonardo da Vinci",
+                    c: "Vincent van Gogh"
+                },
+                correct: "b"
+            },
+            {
+                question: "Qual é a capital da França?",
+                options: {
+                    a: "Berlim",
+                    b: "Madri",
+                    c: "Paris"
+                },
+                correct: "c"
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+
+        function loadQuestion() {
+            const questionContainer = document.getElementById('question-container');
+            const questionElement = document.getElementById('question');
+            const optionsContainer = document.getElementById('options');
+
+            const currentQuestion = questions[currentQuestionIndex];
+            questionElement.textContent = currentQuestion.question;
+            optionsContainer.innerHTML = '';
+
+            for (let key in currentQuestion.options) {
+                const optionLabel = document.createElement('label');
+                const optionRadio = document.createElement('input');
+                optionRadio.type = 'radio';
+                optionRadio.name = 'option';
+                optionRadio.value = key;
+                optionLabel.appendChild(optionRadio);
+                optionLabel.appendChild(document.createTextNode(currentQuestion.options[key]));
+                optionsContainer.appendChild(optionLabel);
+            }
+        }
+
+        function nextQuestion() {
+            const selectedOption = document.querySelector('input[name="option"]:checked');
+            if (!selectedOption) return;
+
+            const isCorrect = selectedOption.value === questions[currentQuestionIndex].correct;
+            document.body.style.backgroundColor = isCorrect ? 'lightgreen' : 'lightcoral';
+
+            if (isCorrect) {
+                score++;
+            }
+
+            setTimeout(() => {
+                document.body.style.backgroundColor = '#f2f2f2';
+                currentQuestionIndex++;
+                if (currentQuestionIndex < questions.length) {
+                    loadQuestion();
+                } else {
+                    showResults();
+                }
+            }, 1000);
+        }
+
+        function showResults() {
+            const questionContainer = document.getElementById('question-container');
+            questionContainer.innerHTML = `<h3>Fim do Quiz!</h3><p>Você acertou ${score} de ${questions.length} perguntas.</p>`;
+        }
+
+        loadQuestion();
+    </script>
+</body>
+</html>
