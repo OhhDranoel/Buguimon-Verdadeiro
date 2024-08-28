@@ -1,65 +1,58 @@
-const question = document.querySelector(".question");
-const answers = document.querySelector(".answers");
-const spnQtd = document.querySelector(".spnQtd");
-const textFinish = document.querySelector(".finish span");
-const content = document.querySelector(".content");
-const contentFinish = document.querySelector(".finish");
-const btnRestart = document.querySelector(".finish button");
+import questions from './questions.js';
 
-import questions from "./questions.js";
+let currentQuestionIndex = 0;
+let score = 0;
 
-let currentIndex = 0;
-let questionsCorrect = 0;
-
-btnRestart.onclick = () => {
-  content.style.display = "flex";
-  contentFinish.style.display = "none";
-
-  currentIndex = 0;
-  questionsCorrect = 0;
-  loadQuestion();
-};
-
-function nextQuestion(e) {
-  if (e.target.getAttribute("data-correct") === "true") {
-    questionsCorrect++;
-  }
-
-  if (currentIndex < questions.length - 1) {
-    currentIndex++;
-    loadQuestion();
-  } else {
-    finish();
-  }
-}
-
-function finish() {
-  textFinish.innerHTML = `você acertou ${questionsCorrect} de ${questions.length}`;
-  content.style.display = "none";
-  contentFinish.style.display = "flex";
-}
+const questionElement = document.querySelector('.question');
+const answersContainer = document.querySelector('.answers');
+const finishContainer = document.querySelector('.finish');
+const spanQtd = document.querySelector('.spnQtd');
 
 function loadQuestion() {
-  spnQtd.innerHTML = `${currentIndex + 1}/${questions.length}`;
-  const item = questions[currentIndex];
-  answers.innerHTML = "";
-  question.innerHTML = item.question;
+  const currentQuestion = questions[currentQuestionIndex];
+  questionElement.innerText = currentQuestion.question;
+  answersContainer.innerHTML = '';
 
-  item.answers.forEach((answer) => {
-    const div = document.createElement("div");
+  currentQuestion.answers.forEach((answer) => {
+    const button = document.createElement('button');
+    button.innerText = answer.option;
+    button.addEventListener('click', () => {
+      const isCorrect = currentQuestion.handleAnswer(button, answer.correct);
+      
+      if (isCorrect) {
+        score++;
+      }
 
-    div.innerHTML = `
-    <button class="answer" data-correct="${answer.correct}">
-      ${answer.option}
-    </button>
-    `;
-'               '
-    answers.appendChild(div);
+      setTimeout(() => {
+        document.body.style.backgroundColor = '#f2f2f2'; 
+        button.style.backgroundColor = '#008CCC'; 
+        currentQuestionIndex++;
+        
+        if (currentQuestionIndex < questions.length) {
+          loadQuestion();
+        } else {
+          showResults();
+        }
+      }, 1000);
+    });
+    answersContainer.appendChild(button);
   });
 
-  document.querySelectorAll(".answer").forEach((item) => {
-    item.addEventListener("click", nextQuestion);
-  });
+  spanQtd.innerText = `${currentQuestionIndex + 1}/${questions.length}`;
+}
+
+function showResults() {
+  questionElement.innerText = `Você acertou ${score} de ${questions.length} perguntas.`;
+  answersContainer.style.display = 'none';
+  finishContainer.style.display = 'flex';
 }
 
 loadQuestion();
+
+document.querySelector('.finish button').addEventListener('click', () => {
+  score = 0;
+  currentQuestionIndex = 0;
+  answersContainer.style.display = 'flex';
+  finishContainer.style.display = 'none';
+  loadQuestion();
+});
